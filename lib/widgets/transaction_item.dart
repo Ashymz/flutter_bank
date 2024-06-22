@@ -67,7 +67,7 @@ Widget buildTransactionItemWidget(TransactionModel transactionItem) {
           ],
         ),
         Text(
-          "${transactionItem.price}\$",
+          "\₦${transactionItem.price}",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         )
       ],
