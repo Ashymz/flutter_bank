@@ -5,9 +5,8 @@ List<MenuModel> getMenuList() {
   final List<MenuModel> getMenuList = [
     MenuModel("Top Up", Icons.add),
     MenuModel("Transfer", Icons.account_balance),
-    MenuModel("Pay", Icons.arrow_circle_up),
-    MenuModel("Request", Icons.arrow_circle_down),
-    MenuModel("HIstory", Icons.list_alt),
+    MenuModel("Recharge", Icons.arrow_circle_up),
+    // MenuModel("Request", Icons.arrow_circle_down),
   ];
   return getMenuList;
 }
