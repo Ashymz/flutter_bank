@@ -133,7 +133,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           children: <InlineSpan>[
                                             TextSpan(
                                               text:
-                                                  " \$${bankItem.accountBalance}",
+                                                  " \₦${bankItem.accountBalance}",
                                               style: TextStyle(
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.w700,
