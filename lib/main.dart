@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           home: const MainPage(),
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Bank',
+          title: 'Temmietee Pay',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
