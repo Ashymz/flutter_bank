@@ -28,6 +28,22 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
       } else if (confirmPin.length < 4) {
         confirmPin += value;
       }
+
+      if (confirmPin == '0000') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainPage(),
+          ),
+        );
+      } else if (confirmPin.length == 4 && confirmPin != '0000') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Invalid PIN. Please enter the correct 4-digit PIN.'),
+          ),
+        );
+        confirmPin = ''; // Reset PIN input
+      }
     });
   }
 
@@ -58,19 +74,20 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
       );
 
       if (authenticated) {
-      Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainPage(),
-                  ),
-                );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainPage(),
+          ),
+        );
       } else {
         print('Authentication failed');
-         ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Please set your fingerprint in the settings section your device'),
-                    ),
-                  );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                'Please set your fingerprint in the settings section of your device'),
+          ),
+        );
       }
     } on PlatformException catch (e) {
       print('Authentication error: $e');
@@ -173,31 +190,6 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
     );
   }
 
-  void _showSuccessDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Success'),
-          content: Text('PIN confirmed successfully.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainPage(),
-                  ),
-                );
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,26 +217,6 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
             _buildPinDots(),
             SizedBox(height: 32),
             _buildKeypad(),
-            SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                if (confirmPin == '0000') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainPage(),
-                  ),
-                );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Invalid PIN. Please enter the correct 4-digit PIN.'),
-                    ),
-                  );
-                }
-              },
-              child: Text('Enter'),
-            ),
           ],
         ),
       ),
