@@ -1,6 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bank/screens/main_page.dart';
+import 'package:flutter_bank/screens/welcomeback.dart';
 import 'package:flutter_bank/utils/utils.dart';
 import 'utils/my_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: ThemeProvider(
         initTheme: initTheme,
         child: MaterialApp(
-          home: const MainPage(),
+          home: WelcomeBackScreen(),
           debugShowCheckedModeBanner: false,
           title: 'Temmietee Pay',
           theme: ThemeData(

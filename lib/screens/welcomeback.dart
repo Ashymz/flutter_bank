@@ -5,16 +5,16 @@ import 'package:flutter_bank/screens/home_page.dart';
 import 'package:flutter_bank/screens/main_page.dart';
 import 'package:local_auth/local_auth.dart';
 
-class ConfirmWallet extends StatefulWidget {
-  const ConfirmWallet({
+class WelcomeBackScreen extends StatefulWidget {
+  const WelcomeBackScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  _ConfirmWalletState createState() => _ConfirmWalletState();
+  _WelcomeBackScreenState createState() => _WelcomeBackScreenState();
 }
 
-class _ConfirmWalletState extends State<ConfirmWallet> {
+class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
   final LocalAuthentication _authService = LocalAuthentication();
   bool _isAuthenticated = false;
   String confirmPin = '';
@@ -58,9 +58,19 @@ class _ConfirmWalletState extends State<ConfirmWallet> {
       );
 
       if (authenticated) {
-        _showSuccessDialog();
+      Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainPage(),
+                  ),
+                );
       } else {
         print('Authentication failed');
+         ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Please set your fingerprint in the settings section your device'),
+                    ),
+                  );
       }
     } on PlatformException catch (e) {
       print('Authentication error: $e');
@@ -191,37 +201,26 @@ class _ConfirmWalletState extends State<ConfirmWallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   leading: GestureDetector(
-      //     onTap: () {
-      //       // Get.back();
-      //     },
-      //     child: const Icon(Icons.arrow_back_ios),
-      //   ),
-      //   title: const Text(
-      //     'BitBust',
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //       fontFamily: 'Gilroy Bold',
-      //       fontSize: 30,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      // ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Confirm your Wallet Pin',
+              'Welcome Back!',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
                   fontFamily: 'Gilroy Medium'),
             ),
             SizedBox(height: 8),
+            Text(
+              'Please enter your PIN to continue',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: 'Gilroy Medium'),
+            ),
             SizedBox(height: 32),
             _buildPinDots(),
             SizedBox(height: 32),
@@ -229,17 +228,22 @@ class _ConfirmWalletState extends State<ConfirmWallet> {
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                if (confirmPin.length == '1234') {
-                  _showSuccessDialog();
+                if (confirmPin == '0000') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainPage(),
+                  ),
+                );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Please enter a 4-digit PIN.'),
+                      content: Text('Invalid PIN. Please enter the correct 4-digit PIN.'),
                     ),
                   );
                 }
               },
-              child: Text('Send'),
+              child: Text('Enter'),
             ),
           ],
         ),
