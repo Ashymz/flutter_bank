@@ -234,7 +234,7 @@ class _ConfirmWalletState extends State<ConfirmWallet> {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Please enter a 4-digit PIN.'),
+                      content: Text('Enter Valid pin'),
                     ),
                   );
                 }
